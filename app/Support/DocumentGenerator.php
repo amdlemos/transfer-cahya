@@ -2,6 +2,8 @@
 
 namespace App\Support;
 
+use App\UserType;
+
 class DocumentGenerator
 {
     // CPF: 11 dígitos
@@ -61,7 +63,7 @@ class DocumentGenerator
     }
 
     // Decide com base no tipo
-    public static function forType(string $type): string
+    public static function forType(UserType $type): string
     {
         return $type === 'merchant'
             ? static::cnpj()
