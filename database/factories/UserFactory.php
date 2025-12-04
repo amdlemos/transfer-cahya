@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\UserType;
+use App\Support\DocumentGenerator;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -23,8 +25,19 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $firstName = fake()->firstName();
+        $lastName = fake()->lastName();
+
+        $type = $this->faker->randomElement([
+            UserType::Common,
+            UserType::Merchant,
+        ]);
+
         return [
-            'name' => fake()->name(),
+            'name' => $firstName,
+            'full_name' => "{$firstName} {$lastName}",
+            'document'  => DocumentGenerator::forType($type),
+            'type'      => $type,
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
@@ -37,8 +50,28 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'email_verified_at' => null,
         ]);
+    }
+
+    public function common(): static
+    {
+        return $this->state(function () {
+            return [
+                'type'     => UserType::Common,
+                'document' => DocumentGenerator::cpf(),
+            ];
+        });
+    }
+
+    public function merchant(): static
+    {
+        return $this->state(function () {
+            return [
+                'type'     => UserType::Merchant,
+                'document' => DocumentGenerator::cnpj(),
+            ];
+        });
     }
 }
