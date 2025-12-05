@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use App\UserType;
 use App\Models\User;
+use App\UserType;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;

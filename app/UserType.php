@@ -2,6 +2,12 @@
 
 namespace App;
 
+/**
+ * Representa os tipos de usuários do sistema.
+ *
+ * - Common: usuário comum
+ * - Merchant: usuário lojista
+ */
 enum UserType: string
 {
     case Common = 'common';

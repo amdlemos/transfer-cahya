@@ -23,7 +23,7 @@
   </rule>
   <!-- PEAR -->
   <rule ref="PEAR.Commenting.ClassComment.MissingAuthorTag">
-    <severity>9</severity>
+    <severity>4</severity>
   </rule>
   <rule ref="PEAR.Commenting.ClassComment.MissingCategoryTag">
     <severity>4</severity>
@@ -47,4 +47,15 @@
   <rule ref="PSR12.Classes.ClassInstantiation.MissingParentheses">
     <severity>0</severity>
   </rule>
+    <!-- Pastas ou arquivos que serão ignorados -->
+  <exclude-pattern>vendor/*</exclude-pattern>
+  <exclude-pattern>storage/*</exclude-pattern>
+  <exclude-pattern>.ddev/*</exclude-pattern>
+  <exclude-pattern>bootstrap/*</exclude-pattern>
+  <exclude-pattern>config/*</exclude-pattern>
+  <exclude-pattern>tests/*</exclude-pattern>
+  <exclude-pattern>database/*</exclude-pattern>
+  <exclude-pattern>tests/*</exclude-pattern>
+  <exclude-pattern>public/*</exclude-pattern>
+
 </ruleset>

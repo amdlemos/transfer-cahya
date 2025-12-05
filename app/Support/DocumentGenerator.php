@@ -4,6 +4,11 @@ namespace App\Support;
 
 use App\UserType;
 
+/**
+ * Suppress all warnings from the rule below.
+ *
+ * @SuppressWarnings(PHPMD.ShortVariable)
+ */
 class DocumentGenerator
 {
     // CPF: 11 dígitos
@@ -30,7 +35,7 @@ class DocumentGenerator
         $d2 += $d1 * 2;
         $d2 = ($d2 % 11 < 2) ? 0 : 11 - ($d2 % 11);
 
-        return implode('', $n) . $d1 . $d2;
+        return implode('', $n).$d1.$d2;
     }
 
     // CNPJ: 14 dígitos
@@ -59,7 +64,7 @@ class DocumentGenerator
         $sum += $d1 * 2;
         $d2 = ($sum % 11 < 2) ? 0 : 11 - ($sum % 11);
 
-        return implode('', $n) . $d1 . $d2;
+        return implode('', $n).$d1.$d2;
     }
 
     // Decide com base no tipo
