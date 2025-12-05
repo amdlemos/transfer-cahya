@@ -23,7 +23,7 @@
   </rule>
   <!-- PEAR -->
   <rule ref="PEAR.Commenting.ClassComment.MissingAuthorTag">
-    <severity>9</severity>
+    <severity>4</severity>
   </rule>
   <rule ref="PEAR.Commenting.ClassComment.MissingCategoryTag">
     <severity>4</severity>
