@@ -21,5 +21,8 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+        // Se quiser criar vários usuários aleatórios:
+        User::factory()->count(20)->common()->create();
+        User::factory()->count(5)->merchant()->create();
     }
 }
