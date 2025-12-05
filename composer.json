@@ -73,7 +73,7 @@
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
         ],
-        "phpcbf": "phpcbf --report=summary --standard=phpcs.xml .",
+        "phpcbf": "phpcbf --report=summary --standard=phpcs.xml . || exit 0",
         "pint": "pint",
         "pint:test": "pint --test",
         "phpcs": "phpcs --report=summary --standard=phpcs.xml .",
