@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<ruleset name="Whitelabel">
+  <description>Regras personalizadas.</description>
+  <!-- Show progress of the run -->
+  <arg value="p"/>
+  <!-- Show sniff codes in all reports -->
+  <arg value="s"/>
+  <rule ref="PSR12"/>
+  <rule ref="PSR12">
+    <exclude name="PSR12.Operators.OperatorSpacing.NoSpaceBefore"/>
+    <exclude name="PSR12.Operators.OperatorSpacing.NoSpaceAfter"/>
+    <exclude name="PSR2.Classes.ClassDeclaration.OpenBraceNewLine"/>
+  </rule>
+  <!-- Squiz -->
+  <rule ref="Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine">
+    <severity>0</severity>
+  </rule>
+  <rule ref="Squiz.WhiteSpace.ScopeClosingBrace.ContentBefore">
+    <severity>0</severity>
+  </rule>
+  <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EndLine">
+    <severity>0</severity>
+  </rule>
+  <!-- PEAR -->
+  <rule ref="PEAR.Commenting.ClassComment.MissingAuthorTag">
+    <severity>9</severity>
+  </rule>
+  <rule ref="PEAR.Commenting.ClassComment.MissingCategoryTag">
+    <severity>4</severity>
+  </rule>
+  <rule ref="PEAR.Commenting.ClassComment.MissingLicenseTag">
+    <severity>4</severity>
+  </rule>
+  <rule ref="PEAR.Commenting.ClassComment.MissingLinkTag">
+    <severity>4</severity>
+  </rule>
+  <rule ref="PEAR.Commenting.ClassComment.Missing">
+    <severity>8</severity>
+  </rule>
+  <!-- Generic -->
+  <rule ref="Generic.Commenting.DocComment.NonParamGroup">
+    <severity>4</severity>
+  </rule>
+  <rule ref="Generic.Commenting.DocComment.MissingShort">
+    <severity>9</severity>
+  </rule>
+  <rule ref="PSR12.Classes.ClassInstantiation.MissingParentheses">
+    <severity>0</severity>
+  </rule>
+</ruleset>
