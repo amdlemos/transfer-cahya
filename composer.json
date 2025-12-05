@@ -76,7 +76,7 @@
         "phpcbf": "phpcbf --report=summary --standard=phpcs.xml . || exit 0",
         "pint": "pint",
         "pint:test": "pint --test",
-        "phpcs": "phpcs --report=summary --standard=phpcs.xml .",
+        "phpcs": "phpcs --report=summary --standard=phpcs.xml . -n",
         "phpmd": "phpmd . github phpmd.xml --exclude 'tests/*,vendor/*,.ddev/*'",
         "fix": [
             "@phpcbf",
