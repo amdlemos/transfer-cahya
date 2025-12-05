@@ -8,9 +8,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * Representa um usuário da aplicação.
+ */
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    /**
+     * * Factory para testes e criação de instâncias.
+     *
+     * @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
 
     use Notifiable;
