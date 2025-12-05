@@ -5,9 +5,6 @@ on:
       - main
   pull_request:
 jobs:
-  # ===================== #
-  # Setup: instalar deps   #
-  # ===================== #
   setup:
     runs-on: ubuntu-latest
     outputs:
@@ -38,49 +35,8 @@ jobs:
           key: node-${{ hashFiles('package-lock.json') }}
       - name: Install Node modules
         run: npm install
-        # ===================== #
-  # Phase 1a: PHPCBF       #
-  # ===================== #
-  phpcbf:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.4
-          tools: composer:v2
-      - name: Restore Composer cache
-        uses: actions/cache@v3
-        with:
-          path: vendor
-          key: composer-${{ hashFiles('composer.lock') }}
-      - name: Run PHPCBF (auto-fix)
-        run: composer phpcbf || true
-  # ===================== #
-  # Phase 1b: Pint fix     #
-  # ===================== #
-  pint-fix:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.4
-          tools: composer:v2
-      - name: Restore Composer cache
-        uses: actions/cache@v3
-        with:
-          path: vendor
-          key: composer-${{ hashFiles('composer.lock') }}
-      - name: Run Pint fix
-        run: composer pint
-  # ===================== #
-  # Phase 2: Diagnostics   #
-  # ===================== #
   pint:
-    needs: [phpcbf, pint-fix]
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -95,7 +51,7 @@ jobs:
           key: composer-${{ hashFiles('composer.lock') }}
       - run: composer pint:test
   phpcs:
-    needs: [phpcbf, pint-fix]
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -110,7 +66,7 @@ jobs:
           key: composer-${{ hashFiles('composer.lock') }}
       - run: composer phpcs
   phpmd:
-    needs: [phpcbf, pint-fix]
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
