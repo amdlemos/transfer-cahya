@@ -80,7 +80,7 @@ jobs:
   # Phase 2: Diagnostics   #
   # ===================== #
   pint:
-    needs: fix
+    needs: [phpcbf, pint-fix]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -95,7 +95,7 @@ jobs:
           key: composer-${{ hashFiles('composer.lock') }}
       - run: composer pint:test
   phpcs:
-    needs: fix
+    needs: [phpcbf, pint-fix]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -110,7 +110,7 @@ jobs:
           key: composer-${{ hashFiles('composer.lock') }}
       - run: composer phpcs
   phpmd:
-    needs: fix
+    needs: [phpcbf, pint-fix]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
