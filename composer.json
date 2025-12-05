@@ -18,10 +18,11 @@
     "require-dev": {
         "fakerphp/faker": "^1.23",
         "laravel/pail": "^1.2.2",
-        "laravel/pint": "^1.24",
+        "laravel/pint": "^1.26",
         "laravel/sail": "^1.41",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
+        "phpmd/phpmd": "@stable",
         "phpunit/phpunit": "^11.5.3",
         "squizlabs/php_codesniffer": "^4.0"
     },
@@ -71,6 +72,15 @@
         ],
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
+        ],
+        "phpcbf": "phpcbf --report=summary --standard=phpcs.xml .",
+        "pint": "pint",
+        "pint:test": "pint --test",
+        "phpcs": "phpcs --report=summary --standard=phpcs.xml .",
+        "phpmd": "phpmd . github phpmd.xml --exclude 'tests/*,vendor/*,.ddev/*'",
+        "fix": [
+            "@phpcbf",
+            "@pint"
         ]
     },
     "extra": {

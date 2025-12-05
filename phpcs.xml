@@ -47,4 +47,10 @@
   <rule ref="PSR12.Classes.ClassInstantiation.MissingParentheses">
     <severity>0</severity>
   </rule>
+    <!-- Pastas ou arquivos que serão ignorados -->
+  <exclude-pattern>vendor/*</exclude-pattern>
+  <exclude-pattern>storage/*</exclude-pattern>
+  <exclude-pattern>.ddev/*</exclude-pattern>
+  <exclude-pattern>bootstrap/*</exclude-pattern>
+
 </ruleset>
