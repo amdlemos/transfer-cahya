@@ -17,6 +17,7 @@
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
+        "larastan/larastan": "^3.0",
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.26",
         "laravel/sail": "^1.41",
@@ -78,6 +79,7 @@
         "pint:test": "pint --test",
         "phpcs": "phpcs --report=summary --standard=phpcs.xml . -n",
         "phpmd": "phpmd . github phpmd.xml --exclude 'tests/*,vendor/*,.ddev/*'",
+        "phpstan": "phpstan analyse",
         "fix": [
             "@phpcbf",
             "@pint"
