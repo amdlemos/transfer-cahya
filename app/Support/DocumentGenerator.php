@@ -4,6 +4,11 @@ namespace App\Support;
 
 use App\UserType;
 
+/**
+ * Suppress all warnings from the rule below.
+ *
+ * @SuppressWarnings(PHPMD.ShortVariable)
+ */
 class DocumentGenerator
 {
     // CPF: 11 dígitos
