@@ -17,4 +17,12 @@ enum UserType: string
     {
         return $this === self::Merchant;
     }
+
+    public function labels(): string
+    {
+        return match ($this) {
+            self::Common => 'Comun',
+            self::Merchant => 'Logista',
+        };
+    }
 }
