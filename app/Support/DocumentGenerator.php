@@ -2,7 +2,7 @@
 
 namespace App\Support;
 
-use App\UserType;
+use App\Enums\UserType;
 
 /**
  * Suppress all warnings from the rule below.

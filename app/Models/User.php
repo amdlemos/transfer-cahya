@@ -3,8 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\UserType;
+use App\Enums\UserType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -57,5 +59,45 @@ class User extends Authenticatable
             'password' => 'hashed',
             'type' => UserType::class,
         ];
+    }
+
+    /**
+     * Relacionamento com Wallet
+     */
+    public function wallet(): HasOne
+    {
+        return $this->hasOne(Wallet::class);
+    }
+
+    /**
+     * Transações enviadas
+     */
+    public function sentTransactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class, 'payer_id');
+    }
+
+    /**
+     * Transações recebidas
+     */
+    public function receivedTransactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class, 'payee_id');
+    }
+
+    /**
+     * Todas as transações (enviadas e recebidas)
+     */
+    public function transactions()
+    {
+        return Transaction::forUser($this->id);
+    }
+
+    /**
+     * Verifica se pode enviar dinheiro
+     */
+    public function canSendMoney(): bool
+    {
+        return $this->type->canSendMoney();
     }
 }

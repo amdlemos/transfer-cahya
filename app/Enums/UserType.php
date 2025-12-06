@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Enums;
 
 /**
  * Representa os tipos de usuários do sistema.
