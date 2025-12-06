@@ -40,7 +40,7 @@
         <flux:sidebar.spacer />
 
         <flux:dropdown position="top" align="start" class="max-lg:hidden">
-            <flux:sidebar.profile avatar="https://fluxui.dev/img/demo/user.png" name="Olivia Martin" />
+            <flux:sidebar.profile avatar="https://fluxui.dev/img/demo/user.png" name="{{ auth()->user()->name }}" />
             <flux:menu>
                 <flux:menu.item icon="arrow-right-start-on-rectangle" x-data @click.prevent="$refs.logoutForm.submit()">
                     Logout
@@ -59,7 +59,9 @@
     </flux:header>
 
     <flux:main>
-        <flux:heading size="xl" level="1">Good afternoon, Olivia</flux:heading>
+        <flux:heading size="xl" level="1">
+            Olá, {{ auth()->user()->name }}
+        </flux:heading>
         <flux:text class="mt-2 mb-6 text-base">Here's what's new today</flux:text>
         <flux:separator variant="subtle" />
         {{ $slot }}
