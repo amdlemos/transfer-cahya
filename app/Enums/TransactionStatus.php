@@ -14,4 +14,16 @@ enum TransactionStatus: string
     case Completed = 'completed';
     case Failed = 'failed';
     case Pending = 'pending';
+
+    /**
+     * Get a human-readable label
+     */
+    public function label(): string
+    {
+        return match ($this) {
+            self::Completed => 'Sucesso',
+            self::Failed => 'Falhou',
+            self::Pending => 'Pendente',
+        };
+    }
 }
