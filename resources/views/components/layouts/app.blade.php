@@ -33,7 +33,8 @@
 
         <flux:sidebar.nav>
             <flux:sidebar.item icon="home" href="/" wire:navigate>Home</flux:sidebar.item>
-            <flux:sidebar.item icon="users" badge="12" href="/users" wire:navigate>Usuários</flux:sidebar.item>
+            <flux:sidebar.item icon="users" href="/users" wire:navigate>Usuários</flux:sidebar.item>
+            <!-- <flux:sidebar.item icon="users" badge="12" href="/users" wire:navigate>Usuários</flux:sidebar.item> -->
         </flux:sidebar.nav>
 
         <flux:sidebar.spacer />
