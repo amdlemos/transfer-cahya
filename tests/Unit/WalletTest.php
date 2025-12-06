@@ -71,7 +71,7 @@ class WalletTest extends TestCase
         $user->wallet->update(['balance' => 50.00]);
 
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('Saldo insuficienasdfasdfte');
+        $this->expectExceptionMessage('Saldo insuficiente');
 
         $user->wallet->debit(100.00);
     }
