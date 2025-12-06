@@ -62,6 +62,18 @@ class User extends Authenticatable
     }
 
     /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        static::created(function (User $user) {
+            $user->wallet()->create([
+                'balance' => 0,
+            ]);
+        });
+    }
+
+    /**
      * Relacionamento com Wallet
      */
     public function wallet(): HasOne

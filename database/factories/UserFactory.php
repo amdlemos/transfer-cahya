@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Enums\UserType;
+use App\Models\User;
 use App\Support\DocumentGenerator;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -43,6 +44,22 @@ class UserFactory extends Factory
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
+    }
+
+    /**
+     * Configure the model factory.
+     * Este método é chamado SEMPRE que a factory cria um model
+     */
+    public function configure(): static
+    {
+        return $this->afterCreating(function (User $user) {
+            // Criar wallet se não existir
+            if (! $user->wallet()->exists()) {
+                $user->wallet()->create([
+                    'balance' => 0,
+                ]);
+            }
+        });
     }
 
     /**
