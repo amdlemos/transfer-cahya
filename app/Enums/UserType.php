@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Enums;
 
 /**
  * Representa os tipos de usuários do sistema.
@@ -16,5 +16,13 @@ enum UserType: string
     public function isMerchant(): bool
     {
         return $this === self::Merchant;
+    }
+
+    public function labels(): string
+    {
+        return match ($this) {
+            self::Common => 'Comun',
+            self::Merchant => 'Logista',
+        };
     }
 }

@@ -1,82 +1,81 @@
-name: Lint and Format
+name: Code Quality
 on:
   push:
     branches:
       - main
   pull_request:
+
 jobs:
   setup:
     runs-on: ubuntu-latest
-    outputs:
-      composer-cache-key: ${{ steps.cache-composer.outputs.cache-hit }}
     steps:
       - uses: actions/checkout@v4
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.4
           tools: composer:v2
+
       - name: Cache Composer dependencies
         id: cache-composer
         uses: actions/cache@v3
         with:
           path: vendor
           key: composer-${{ hashFiles('composer.lock') }}
+
       - name: Install Composer dependencies
+        if: steps.cache-composer.outputs.cache-hit != 'true'
         run: composer install --no-interaction --no-progress
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
+
       - name: Cache Node modules
+        id: cache-node
         uses: actions/cache@v3
         with:
           path: node_modules
           key: node-${{ hashFiles('package-lock.json') }}
+
       - name: Install Node modules
+        if: steps.cache-node.outputs.cache-hit != 'true'
         run: npm install
-  pint:
+
+  quality-checks:
     needs: setup
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        tool:
+          - name: pint
+            command: composer pint:test
+          - name: phpcs
+            command: composer phpcs
+          - name: phpmd
+            command: composer phpmd
+          - name: phpstan
+            command: composer phpstan
+
+    name: ${{ matrix.tool.name }}
+
     steps:
       - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
           php-version: 8.4
           tools: composer:v2
+
       - name: Restore Composer cache
         uses: actions/cache@v3
         with:
           path: vendor
           key: composer-${{ hashFiles('composer.lock') }}
-      - run: composer pint:test
-  phpcs:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.4
-          tools: composer:v2
-      - name: Restore Composer cache
-        uses: actions/cache@v3
-        with:
-          path: vendor
-          key: composer-${{ hashFiles('composer.lock') }}
-      - run: composer phpcs
-  phpmd:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.4
-          tools: composer:v2
-      - name: Restore Composer cache
-        uses: actions/cache@v3
-        with:
-          path: vendor
-          key: composer-${{ hashFiles('composer.lock') }}
-      - run: composer phpmd
+
+      - name: Run ${{ matrix.tool.name }}
+        run: ${{ matrix.tool.command }}

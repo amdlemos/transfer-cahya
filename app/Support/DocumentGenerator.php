@@ -2,12 +2,12 @@
 
 namespace App\Support;
 
-use App\UserType;
+use App\Enums\UserType;
 
 /**
  * Suppress all warnings from the rule below.
  *
- * @SuppressWarnings(PHPMD.ShortVariable)
+ * @SuppressWarnings("PHPMD.ShortVariable")
  */
 class DocumentGenerator
 {
@@ -70,7 +70,7 @@ class DocumentGenerator
     // Decide com base no tipo
     public static function forType(UserType $type): string
     {
-        return $type === 'merchant'
+        return $type === UserType::Merchant
             ? static::cnpj()
             : static::cpf();
     }
