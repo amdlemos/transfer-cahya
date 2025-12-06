@@ -42,7 +42,13 @@
         <flux:dropdown position="top" align="start" class="max-lg:hidden">
             <flux:sidebar.profile avatar="https://fluxui.dev/img/demo/user.png" name="Olivia Martin" />
             <flux:menu>
-                <flux:menu.item icon="arrow-right-start-on-rectangle">Logout</flux:menu.item>
+                <flux:menu.item icon="arrow-right-start-on-rectangle" x-data @click.prevent="$refs.logoutForm.submit()">
+                    Logout
+                </flux:menu.item>
+
+                <form x-ref="logoutForm" method="POST" action="{{ route('logout') }}" class="hidden">
+                    @csrf
+                </form>
             </flux:menu>
         </flux:dropdown>
     </flux:sidebar>
