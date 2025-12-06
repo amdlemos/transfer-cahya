@@ -32,7 +32,7 @@ final class UserTable extends PowerGridComponent
 
     public function datasource(): Builder
     {
-        return User::query();
+        return User::query()->with('wallet');
     }
 
     public function relationSearch(): array
@@ -48,7 +48,8 @@ final class UserTable extends PowerGridComponent
             ->add('email')
             ->add('full_name')
             ->add('document')
-            ->add('type')
+            ->add('balance', fn ($user) => $user->wallet?->balance ?? 0)
+            ->add('type_label', fn ($user) => $user->type->labels())
             ->add('created_at');
     }
 
@@ -75,12 +76,13 @@ final class UserTable extends PowerGridComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Type', 'type')
+            Column::add()
+                ->title('Balance')
+                ->field('balance'),
+
+            Column::make('Type', 'type_label')
                 ->sortable()
                 ->searchable(),
-
-            Column::make('Created at', 'created_at_formatted', 'created_at')
-                ->sortable(),
 
             Column::make('Created at', 'created_at')
                 ->sortable()
