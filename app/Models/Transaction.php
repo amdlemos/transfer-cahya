@@ -104,6 +104,14 @@ class Transaction extends Model
     }
 
     /**
+     * Marca transação como falha técnica
+     */
+    public function markAsReversed(): void
+    {
+        $this->update(['status' => TransactionStatus::Reversed]);
+    }
+
+    /**
      * Filtra transações com status completado
      */
     public function scopeCompleted($query)
