@@ -13,6 +13,36 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * Representa uma transaçao monetária entre usuários
  *
  * @SuppressWarnings("PHPMD.TooManyPublicMethods")
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $payer_id
+ * @property int $payee_id
+ * @property numeric $amount
+ * @property TransactionStatus $status
+ * @property string|null $description
+ * @property-read \App\Models\TransactionAuthorization|null $authorization
+ * @property-read \App\Models\User $payee
+ * @property-read \App\Models\User $payer
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Transaction completed()
+ * @method static \Database\Factories\TransactionFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Transaction failed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Transaction forUser(int $userId)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Transaction newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Transaction newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Transaction pending()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Transaction query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Transaction receivedBy(int $userId)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Transaction sentBy(int $userId)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Transaction whereAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Transaction whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Transaction whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Transaction whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Transaction wherePayeeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Transaction wherePayerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Transaction whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Transaction whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Transaction extends Model
 {
