@@ -11,12 +11,15 @@ use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
 
 /**
- * Tabela de exibição de usuários padrão
+ * Componente PowerGrid para exibição e gerenciamento de tabela de usuários
  */
 final class UserTable extends PowerGridComponent
 {
     public string $tableName = 'userTable';
 
+    /**
+     * Configura as opções da tabela PowerGrid
+     */
     public function setUp(): array
     {
         $this->showCheckBox();
@@ -30,16 +33,25 @@ final class UserTable extends PowerGridComponent
         ];
     }
 
+    /**
+     * Define a fonte de dados para a tabela
+     */
     public function datasource(): Builder
     {
         return User::query()->with('wallet');
     }
 
+    /**
+     * Define os relacionamentos para busca
+     */
     public function relationSearch(): array
     {
         return [];
     }
 
+    /**
+     * Define os campos a serem exibidos na tabela
+     */
     public function fields(): PowerGridFields
     {
         return PowerGrid::fields()
@@ -53,6 +65,9 @@ final class UserTable extends PowerGridComponent
             ->add('created_at');
     }
 
+    /**
+     * Define as colunas a serem exibidas na tabela
+     */
     public function columns(): array
     {
         return [
@@ -92,18 +107,27 @@ final class UserTable extends PowerGridComponent
         ];
     }
 
+    /**
+     * Define os filtros disponíveis na tabela
+     */
     public function filters(): array
     {
         return [
         ];
     }
 
+    /**
+     * Trata o evento de edição de linha
+     */
     #[\Livewire\Attributes\On('edit')]
     public function edit($rowId): void
     {
         $this->js('alert('.$rowId.')');
     }
 
+    /**
+     * Define as ações disponíveis para cada linha da tabela
+     */
     public function actions(User $row): array
     {
         return [

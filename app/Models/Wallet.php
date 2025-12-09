@@ -55,5 +55,4 @@ class Wallet extends Model
     {
         $this->increment('balance', $amount);
     }
-    //
 }
