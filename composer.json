@@ -82,7 +82,7 @@
         "pint": "pint",
         "pint:test": "pint --test",
         "phpcs": "phpcs --report=summary --standard=phpcs.xml . -n",
-        "phpmd": "phpmd . github phpmd.xml --exclude 'tests/*,vendor/*,.ddev/*,app/Actions/Fortify/*'",
+        "phpmd": "phpmd . github phpmd.xml --exclude 'tests/*,vendor/*,.ddev/*,app/Actions/Fortify/*,_ide_helper.php'",
         "phpstan": "phpstan analyse",
         "fix": [
             "@phpcbf",
