@@ -57,5 +57,6 @@
   <exclude-pattern>database/*</exclude-pattern>
   <exclude-pattern>tests/*</exclude-pattern>
   <exclude-pattern>public/*</exclude-pattern>
+  <exclude-pattern>app/Actions/Fortify/*</exclude-pattern>
 
 </ruleset>
