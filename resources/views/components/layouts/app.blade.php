@@ -33,8 +33,9 @@
 
         <flux:sidebar.nav>
             <flux:sidebar.item icon="home" href="/" wire:navigate>Home</flux:sidebar.item>
-            <flux:sidebar.item icon="users" href="/users" wire:navigate>Usuários</flux:sidebar.item>
-            <flux:sidebar.item icon="users" href="/profile/deposit" wire:navigate>Depósito</flux:sidebar.item>
+            <flux:sidebar.item icon="users" href="{{ route('users') }}" wire:navigate>Usuários</flux:sidebar.item>
+            <flux:sidebar.item icon="currency-dollar" href="{{ route('deposit') }}" wire:navigate>Depósito
+            </flux:sidebar.item>
             <!-- <flux:sidebar.item icon="users" badge="12" href="/users" wire:navigate>Usuários</flux:sidebar.item> -->
         </flux:sidebar.nav>
 
@@ -63,7 +64,7 @@
         <flux:heading size="xl" level="1">
             Olá, {{ auth()->user()->name }}
         </flux:heading>
-        <flux:text class="mt-2 mb-6 text-base">Here's what's new today</flux:text>
+        <flux:text class="mt-2 mb-6 text-base">Seja bem vindo</flux:text>
         <flux:separator variant="subtle" />
         {{ $slot }}
     </flux:main>

@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-})->middleware('auth');
+})->name('home')->middleware('auth');
 
 Route::get('/users', UserTable::class)->name('users')->middleware('auth');
 
-Route::get('/profile/deposit', DepositoForm::class)->name('users')->middleware('auth');
+Route::get('/deposit', DepositoForm::class)->name('deposit')->middleware('auth');
