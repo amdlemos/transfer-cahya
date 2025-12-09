@@ -33,8 +33,8 @@
             </div>
 
             <div class="flex-1 p-4 max-lg:hidden">
-                <div class="text-white relative rounded-lg h-full w-full bg-zinc-900 flex flex-col items-start justify-end p-16"
-                    style="background-image: url('/img/demo/auth_aurora_2x.png'); background-size: cover">
+                <div
+                    class="text-white relative rounded-lg h-full w-full bg-zinc-900 flex flex-col items-start justify-end p-16">
                     <div class="flex gap-2 mb-4">
                         <flux:icon.star variant="solid" />
                         <flux:icon.star variant="solid" />
