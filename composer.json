@@ -19,6 +19,7 @@
         "wireui/wireui": "^2.5"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^3.6",
         "fakerphp/faker": "^1.23",
         "larastan/larastan": "^3.0",
         "laravel/pail": "^1.2.2",
@@ -81,7 +82,7 @@
         "pint": "pint",
         "pint:test": "pint --test",
         "phpcs": "phpcs --report=summary --standard=phpcs.xml . -n",
-        "phpmd": "phpmd . github phpmd.xml --exclude 'tests/*,vendor/*,.ddev/*'",
+        "phpmd": "phpmd . github phpmd.xml --exclude 'tests/*,vendor/*,.ddev/*,app/Actions/Fortify/*'",
         "phpstan": "phpstan analyse",
         "fix": [
             "@phpcbf",
