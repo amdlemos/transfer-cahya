@@ -4,8 +4,12 @@ namespace App\Livewire;
 
 use App\Exceptions\UnauthorizedTransferException;
 use App\Services\DepositService;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
+/**
+ * Componente Livewire para gerenciar depósitos em carteiras de usuários
+ */
 class DepositoForm extends Component
 {
     public $amount = '';
@@ -29,30 +33,39 @@ class DepositoForm extends Component
         'amount.max' => 'O valor máximo é R$ 999.999,99.',
     ];
 
+    /**
+     * Inicializa o componente e carrega o saldo atual do usuário
+     */
     public function mount()
     {
         $this->updateBalance();
     }
 
+    /**
+     * Atualiza o saldo da carteira do usuário autenticado
+     */
     public function updateBalance()
     {
-        $this->currentBalance = auth()->user()->wallet->fresh()->balance;
+        $this->currentBalance = auth()->guard()->user()->wallet->fresh()->balance;
     }
 
+    /**
+     * Processa um novo depósito na carteira do usuário
+     */
     public function deposit(DepositService $depositService)
     {
         $this->validate();
         $this->reset(['successMessage', 'errorMessage', 'failedTransaction']);
 
         try {
-            $transaction = $depositService->deposit(auth()->user(), (float) $this->amount);
+            $depositService->deposit(auth()->guard()->user(), (float) $this->amount);
 
             $this->successMessage = 'Depósito de R$ '.number_format($this->amount, 2, ',', '.').' realizado com sucesso!';
             $this->reset('amount');
 
             $this->dispatch('balance-updated');
         } catch (UnauthorizedTransferException $e) {
-            $this->failedTransaction = auth()->user()
+            $this->failedTransaction = Auth::user()
                 ->sentTransactions()
                 ->where('status', 'failed')
                 ->latest()
@@ -64,6 +77,9 @@ class DepositoForm extends Component
         }
     }
 
+    /**
+     * Retenta um depósito que falhou anteriormente
+     */
     public function retry(DepositService $depositService)
     {
         if (! $this->failedTransaction) {
@@ -86,6 +102,9 @@ class DepositoForm extends Component
         }
     }
 
+    /**
+     * Renderiza a view do componente
+     */
     public function render()
     {
         return view('livewire.deposito-form');

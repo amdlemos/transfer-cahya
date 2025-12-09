@@ -48,10 +48,10 @@ class Transaction extends Model
     /**
      * Relacionamento com TransactionAuthorization
      */
-    /* public function authorization(): HasOne */
-    /* { */
-    /*     return $this->hasOne(TransactionAuthorization::class); */
-    /* } */
+    public function authorization(): HasOne
+    {
+        return $this->hasOne(TransactionAuthorization::class);
+    }
 
     /**
      * Relacionamento com Notifications
@@ -102,13 +102,16 @@ class Transaction extends Model
     }
 
     /**
-     * Scopes para filtrar por status
+     * Filtra transações com status completado
      */
     public function scopeCompleted($query)
     {
         return $query->where('status', TransactionStatus::Completed);
     }
 
+    /**
+     * Filtra transações com status falha
+     */
     public function scopeFailed($query)
     {
         return $query->where('status', TransactionStatus::Failed);
@@ -139,6 +142,9 @@ class Transaction extends Model
         return $query->where('payee_id', $userId);
     }
 
+    /**
+     * Filtra transações com status pendente
+     */
     public function scopePending($query)
     {
         return $query->where('status', TransactionStatus::Pending);
