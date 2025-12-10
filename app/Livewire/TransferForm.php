@@ -67,8 +67,6 @@ class TransferForm extends Component
 
             $this->successMessage = 'Transferência de R$ '.number_format((float) $this->amount, 2, ',', '.').' realizada com sucesso! (ID: '.$transaction->id.')';
             $this->reset(['amount', 'payeeId']);
-
-            $this->dispatch('balance-updated');
             $this->updateBalance();
         } catch (UnauthorizedTransferException $e) {
             \Log::warning('Transferência não autorizada', ['error' => $e->getMessage()]);

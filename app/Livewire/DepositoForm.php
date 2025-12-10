@@ -51,8 +51,7 @@ class DepositoForm extends Component
             'Depósito de R$ '.number_format((float) $this->amount, 2, ',', '.').' realizado com sucesso!';
 
             $this->reset('amount');
-
-            $this->dispatch('balance-updated');
+            $this->updateBalance();
         } catch (UnauthorizedTransferException $e) {
             $this->failedTransaction = Auth::user()
                 ->sentTransactions()
@@ -84,8 +83,7 @@ class DepositoForm extends Component
             'Depósito de R$ '.number_format((float) $transaction->amount, 2, ',', '.').' realizado com sucesso!';
 
             $this->reset(['failedTransaction', 'amount']);
-
-            $this->dispatch('balance-updated');
+            $this->updateBalance();
         } catch (UnauthorizedTransferException $e) {
             $this->errorMessage = $e->getMessage();
         } catch (\Exception $e) {

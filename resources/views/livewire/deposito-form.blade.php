@@ -5,8 +5,7 @@
         {{-- Saldo Atual --}}
         <div class="mb-6 p-4 bg-gray-100 rounded-lg">
             <p class="text-sm text-gray-600">Saldo Atual</p>
-            <p class="text-3xl font-bold text-green-600" x-data="{ balance: {{ auth()->user()->wallet->balance }} }"
-                @balance-updated.window="balance = {{ auth()->user()->wallet->fresh()->balance }}">
+            <p class="text-3xl font-bold text-green-600" x-data="{ balance: @entangle('currentBalance') }">
                 R$ <span x-text="balance.toFixed(2).replace('.', ',')"></span>
             </p>
         </div>
