@@ -36,6 +36,8 @@
             <flux:sidebar.item icon="users" href="{{ route('users') }}" wire:navigate>Usuários</flux:sidebar.item>
             <flux:sidebar.item icon="currency-dollar" href="{{ route('deposit') }}" wire:navigate>Depósito
             </flux:sidebar.item>
+            <flux:sidebar.item icon="arrow-left" href="{{ route('transfer') }}" wire:navigate>Transferência
+            </flux:sidebar.item>
             <!-- <flux:sidebar.item icon="users" badge="12" href="/users" wire:navigate>Usuários</flux:sidebar.item> -->
         </flux:sidebar.nav>
 
