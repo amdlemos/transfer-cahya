@@ -97,12 +97,12 @@ final class TransactionTable extends PowerGridComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Payer', 'payer_name')
+            Column::make('Pagador', 'payer_name')
                 ->searchable(),
 
-            Column::make('Payee', 'payee_name')
+            Column::make('Beneficiário', 'payee_name')
                 ->searchable(),
-            Column::make('Amount', 'amount')
+            Column::make('Valor', 'amount')
                 ->sortable()
                 ->searchable(),
 
@@ -110,11 +110,11 @@ final class TransactionTable extends PowerGridComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Description', 'description')
+            Column::make('Descrição', 'description')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Created at', 'created_at_formatted', 'created_at')
+            Column::make('Data', 'created_at_formatted', 'created_at')
                 ->sortable(),
         ];
     }
