@@ -38,7 +38,11 @@ final class UserTable extends PowerGridComponent
      */
     public function datasource(): Builder
     {
-        return User::query()->with('wallet');
+        // Join com a tabela wallets e expor o saldo como alias `balance`
+        // para que PowerGrid possa ordenar por essa coluna diretamente.
+        return User::query()
+            ->leftJoin('wallets', 'wallets.user_id', '=', 'users.id')
+            ->select('users.*', 'wallets.balance as balance');
     }
 
     /**
@@ -60,7 +64,7 @@ final class UserTable extends PowerGridComponent
             ->add('email')
             ->add('full_name')
             ->add('document')
-            ->add('balance', fn ($user) => $user->wallet?->balance ?? 0)
+            ->add('balance', fn ($user) => $user->balance ?? 0)
             ->add('type_label', fn ($user) => $user->type->labels())
             ->add('created_at');
     }
@@ -93,10 +97,10 @@ final class UserTable extends PowerGridComponent
 
             Column::add()
                 ->title('Balance')
-                ->field('balance'),
+                ->field('balance')
+                ->sortable(),
 
             Column::make('Type', 'type_label')
-                ->sortable()
                 ->searchable(),
 
             Column::make('Created at', 'created_at')
