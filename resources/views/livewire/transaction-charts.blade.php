@@ -60,14 +60,9 @@
                 <hr class="border-zinc-200 dark:border-zinc-700" />
                 <div class="flex justify-between items-center">
                     <span class="text-sm text-gray-600 dark:text-gray-400">Saldo:</span>
-                    <span class="font-semibold {{ $balance >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400' }}">
+                    <span
+                        class="font-semibold {{ $balance >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400' }}">
                         R$ {{ number_format($balance, 2, ',', '.') }}
-                    </span>
-                </div>
-                <div class="flex justify-between items-center">
-                    <span class="text-sm text-gray-600 dark:text-gray-400">Total de Transações:</span>
-                    <span class="font-semibold">
-                        {{ array_sum($countData['data']) }}
                     </span>
                 </div>
             </div>
@@ -107,9 +102,9 @@
                                 datasets: [{
                                     data: typesData.data,
                                     backgroundColor: [
-                                        'rgba(59, 130, 246, 0.8)',  // Azul para Transferência
-                                        'rgba(34, 197, 94, 0.8)',   // Verde para Depósito
-                                        'rgba(239, 68, 68, 0.8)',   // Vermelho para Saque
+                                        'rgba(59, 130, 246, 0.8)', // Azul para Transferência
+                                        'rgba(34, 197, 94, 0.8)', // Verde para Depósito
+                                        'rgba(239, 68, 68, 0.8)', // Vermelho para Saque
                                     ],
                                     borderColor: [
                                         'rgba(59, 130, 246, 1)',
@@ -134,8 +129,8 @@
                                     label: 'Valor (R$)',
                                     data: sentReceivedData.data,
                                     backgroundColor: [
-                                        'rgba(239, 68, 68, 0.8)',   // Vermelho para Enviadas
-                                        'rgba(34, 197, 94, 0.8)',   // Verde para Recebidas
+                                        'rgba(239, 68, 68, 0.8)', // Vermelho para Enviadas
+                                        'rgba(34, 197, 94, 0.8)', // Verde para Recebidas
                                     ],
                                     borderColor: [
                                         'rgba(239, 68, 68, 1)',
@@ -173,9 +168,9 @@
                                 datasets: [{
                                     data: countData.data,
                                     backgroundColor: [
-                                        'rgba(59, 130, 246, 0.8)',  // Azul para Transferência
-                                        'rgba(34, 197, 94, 0.8)',   // Verde para Depósito
-                                        'rgba(239, 68, 68, 0.8)',   // Vermelho para Saque
+                                        'rgba(59, 130, 246, 0.8)', // Azul para Transferência
+                                        'rgba(34, 197, 94, 0.8)', // Verde para Depósito
+                                        'rgba(239, 68, 68, 0.8)', // Vermelho para Saque
                                     ],
                                     borderColor: [
                                         'rgba(59, 130, 246, 1)',
@@ -193,4 +188,3 @@
         }
     }
 </script>
-
