@@ -23,7 +23,6 @@ class DepositoForm extends Component
 
     public string $errorMessage = '';
 
-
     protected $rules = [
         'amount' => 'required|numeric|min:0.01|max:999999.99',
     ];
@@ -34,7 +33,6 @@ class DepositoForm extends Component
         'amount.min' => 'O valor mínimo é R$ 0,01.',
         'amount.max' => 'O valor máximo é R$ 999.999,99.',
     ];
-
 
     /**
      * Processa um novo depósito na carteira do usuário

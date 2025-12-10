@@ -3,9 +3,9 @@
 namespace Tests\Unit\Services;
 
 use App\Enums\TransactionStatus;
+use App\Models\User;
 use App\Services\AuthorizationService;
 use App\Services\DepositService;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Mockery;
 use Tests\TestCase;

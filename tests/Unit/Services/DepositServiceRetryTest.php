@@ -4,10 +4,10 @@ namespace Tests\Unit\Services;
 
 use App\Enums\TransactionStatus;
 use App\Exceptions\UnauthorizedTransferException;
-use App\Services\AuthorizationService;
-use App\Services\DepositService;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Services\AuthorizationService;
+use App\Services\DepositService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Mockery;
 use Tests\TestCase;

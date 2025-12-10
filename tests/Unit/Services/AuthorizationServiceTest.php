@@ -20,7 +20,7 @@ class AuthorizationServiceTest extends TestCase
             '*' => Http::response(['status' => 'success'], 200),
         ]);
 
-        $service = new AuthorizationService();
+        $service = new AuthorizationService;
 
         $result = $service->authorize($transaction);
 
@@ -40,7 +40,7 @@ class AuthorizationServiceTest extends TestCase
             '*' => Http::response(['status' => 'fail'], 200),
         ]);
 
-        $service = new AuthorizationService();
+        $service = new AuthorizationService;
 
         $result = $service->authorize($transaction);
 
