@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string|null $response
  * @property \Illuminate\Support\Carbon $attempted_at
  * @property-read \App\Models\Transaction $transaction
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TransactionAuthorization newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TransactionAuthorization newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TransactionAuthorization query()
@@ -27,6 +28,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TransactionAuthorization whereResponse($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TransactionAuthorization whereTransactionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TransactionAuthorization whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class TransactionAuthorization extends Model

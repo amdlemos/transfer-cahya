@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * Representa uma transaçao monetária entre usuários
  *
  * @SuppressWarnings("PHPMD.TooManyPublicMethods")
+ *
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -24,6 +25,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property-read \App\Models\TransactionAuthorization|null $authorization
  * @property-read \App\Models\User $payee
  * @property-read \App\Models\User $payer
+ *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Transaction completed()
  * @method static \Database\Factories\TransactionFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Transaction failed()
@@ -42,6 +44,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Transaction wherePayerId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Transaction whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Transaction whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class Transaction extends Model
