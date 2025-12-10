@@ -27,24 +27,41 @@
                     $typesData = $this->getTransactionTypesData();
                     $sentReceivedData = $this->getSentVsReceivedData();
                     $countData = $this->getTransactionTypesCountData();
+                    $sentAmount = $this->getTotalSent();
+                    $receivedAmount = $this->getTotalReceived();
+                    $depositedAmount = $this->getTotalDeposited();
+                    $withdrawnAmount = $this->getTotalWithdrawn();
+                    $balance = $receivedAmount + $depositedAmount - $sentAmount - $withdrawnAmount;
                 @endphp
                 <div class="flex justify-between items-center">
                     <span class="text-sm text-gray-600 dark:text-gray-400">Total Enviado:</span>
                     <span class="font-semibold text-red-600 dark:text-red-400">
-                        R$ {{ number_format($sentReceivedData['data'][0], 2, ',', '.') }}
+                        R$ {{ number_format($sentAmount, 2, ',', '.') }}
                     </span>
                 </div>
                 <div class="flex justify-between items-center">
                     <span class="text-sm text-gray-600 dark:text-gray-400">Total Recebido:</span>
                     <span class="font-semibold text-green-600 dark:text-green-400">
-                        R$ {{ number_format($sentReceivedData['data'][1], 2, ',', '.') }}
+                        R$ {{ number_format($receivedAmount, 2, ',', '.') }}
+                    </span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-600 dark:text-gray-400">Total Depositado:</span>
+                    <span class="font-semibold text-blue-600 dark:text-blue-400">
+                        R$ {{ number_format($depositedAmount, 2, ',', '.') }}
+                    </span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-sm text-gray-600 dark:text-gray-400">Total Sacado:</span>
+                    <span class="font-semibold text-orange-600 dark:text-orange-400">
+                        R$ {{ number_format($withdrawnAmount, 2, ',', '.') }}
                     </span>
                 </div>
                 <hr class="border-zinc-200 dark:border-zinc-700" />
                 <div class="flex justify-between items-center">
                     <span class="text-sm text-gray-600 dark:text-gray-400">Saldo:</span>
-                    <span class="font-semibold {{ ($sentReceivedData['data'][1] - $sentReceivedData['data'][0]) >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400' }}">
-                        R$ {{ number_format($sentReceivedData['data'][1] - $sentReceivedData['data'][0], 2, ',', '.') }}
+                    <span class="font-semibold {{ $balance >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400' }}">
+                        R$ {{ number_format($balance, 2, ',', '.') }}
                     </span>
                 </div>
                 <div class="flex justify-between items-center">

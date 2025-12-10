@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Enums\TransactionStatus;
 use App\Enums\TransactionType;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
@@ -20,15 +21,18 @@ class TransactionCharts extends Component
         $userId = Auth::id();
 
         $transfers = Transaction::where('payer_id', $userId)
-            ->where('description', 'Transferência entre usuários')
+            ->ofType(TransactionType::Transfer)
+            ->where('status', TransactionStatus::Completed)
             ->sum('amount');
 
         $deposits = Transaction::where('payer_id', $userId)
-            ->where('description', 'Depósito')
+            ->ofType(TransactionType::Deposit)
+            ->where('status', TransactionStatus::Completed)
             ->sum('amount');
 
         $withdrawals = Transaction::where('payer_id', $userId)
-            ->where('description', 'Saque')
+            ->ofType(TransactionType::Withdrawal)
+            ->where('status', TransactionStatus::Completed)
             ->sum('amount');
 
         return [
@@ -47,13 +51,21 @@ class TransactionCharts extends Component
 
     /**
      * Obtém dados para gráfico de transações enviadas vs recebidas
+     * Considera apenas transferências (não inclui depósitos e saques)
      */
     public function getSentVsReceivedData(): array
     {
-        $user = Auth::user();
+        $userId = Auth::id();
 
-        $sentAmount = $user->sentTransactions()->sum('amount');
-        $receivedAmount = $user->receivedTransactions()->sum('amount');
+        $sentAmount = Transaction::where('payer_id', $userId)
+            ->ofType(TransactionType::Transfer)
+            ->where('status', TransactionStatus::Completed)
+            ->sum('amount');
+        
+        $receivedAmount = Transaction::where('payee_id', $userId)
+            ->ofType(TransactionType::Transfer)
+            ->where('status', TransactionStatus::Completed)
+            ->sum('amount');
 
         return [
             'labels' => ['Enviadas', 'Recebidas'],
@@ -65,6 +77,58 @@ class TransactionCharts extends Component
     }
 
     /**
+     * Obtém o total de transferências enviadas (exclui depósitos e saques)
+     */
+    public function getTotalSent(): float
+    {
+        $userId = Auth::id();
+
+        return (float) Transaction::where('payer_id', $userId)
+            ->ofType(TransactionType::Transfer)
+            ->where('status', TransactionStatus::Completed)
+            ->sum('amount');
+    }
+
+    /**
+     * Obtém o total de transferências recebidas (exclui depósitos e saques)
+     */
+    public function getTotalReceived(): float
+    {
+        $userId = Auth::id();
+
+        return (float) Transaction::where('payee_id', $userId)
+            ->ofType(TransactionType::Transfer)
+            ->where('status', TransactionStatus::Completed)
+            ->sum('amount');
+    }
+
+    /**
+     * Obtém o total depositado
+     */
+    public function getTotalDeposited(): float
+    {
+        $userId = Auth::id();
+
+        return (float) Transaction::where('payer_id', $userId)
+            ->ofType(TransactionType::Deposit)
+            ->where('status', TransactionStatus::Completed)
+            ->sum('amount');
+    }
+
+    /**
+     * Obtém o total sacado
+     */
+    public function getTotalWithdrawn(): float
+    {
+        $userId = Auth::id();
+
+        return (float) Transaction::where('payer_id', $userId)
+            ->ofType(TransactionType::Withdrawal)
+            ->where('status', TransactionStatus::Completed)
+            ->sum('amount');
+    }
+
+    /**
      * Obtém contagem de transações por tipo
      */
     public function getTransactionTypesCountData(): array
@@ -72,15 +136,18 @@ class TransactionCharts extends Component
         $userId = Auth::id();
 
         $transfersCount = Transaction::where('payer_id', $userId)
-            ->where('description', 'Transferência entre usuários')
+            ->ofType(TransactionType::Transfer)
+            ->where('status', TransactionStatus::Completed)
             ->count();
 
         $depositsCount = Transaction::where('payer_id', $userId)
-            ->where('description', 'Depósito')
+            ->ofType(TransactionType::Deposit)
+            ->where('status', TransactionStatus::Completed)
             ->count();
 
         $withdrawalsCount = Transaction::where('payer_id', $userId)
-            ->where('description', 'Saque')
+            ->ofType(TransactionType::Withdrawal)
+            ->where('status', TransactionStatus::Completed)
             ->count();
 
         return [
