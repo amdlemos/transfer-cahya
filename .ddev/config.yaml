@@ -7,8 +7,8 @@ xdebug_enabled: false
 additional_hostnames: []
 additional_fqdns: []
 database:
-    type: postgres
-    version: "17"
+  type: postgres
+  version: "17"
 use_dns_when_possible: true
 composer_version: "2"
 web_environment: []
@@ -18,7 +18,6 @@ web_extra_exposed_ports:
     container_port: 5173
     http_port: 5172
     https_port: 5173
-
 
 # Key features of DDEV's config.yaml:
 
@@ -148,7 +147,7 @@ web_extra_exposed_ports:
 # These values specify the destination directory for ddev ssh and the
 # directory in which commands passed into ddev exec are run.
 
-# omit_containers: [db, ddev-ssh-agent]
+omit_containers: [ddev-ssh-agent]
 # Currently only these containers are supported. Some containers can also be
 # omitted globally in the ~/.ddev/global_config.yaml. Note that if you omit
 # the "db" container, several standard features of DDEV that access the
