@@ -59,6 +59,8 @@ jobs:
             command: composer phpmd
           - name: phpstan
             command: composer phpstan
+          - name: phpunit
+            command: composer test
 
     name: ${{ matrix.tool.name }}
 
