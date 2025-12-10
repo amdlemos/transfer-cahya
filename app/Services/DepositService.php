@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Enums\TransactionStatus;
+use App\Enums\TransactionType;
 use App\Exceptions\UnauthorizedTransferException;
 use App\Models\Transaction;
 use App\Models\User;
@@ -40,6 +41,7 @@ class DepositService
             'payee_id' => $user->id,
             'amount' => $amount,
             'status' => TransactionStatus::Pending,
+            'type' => TransactionType::Deposit,
             'description' => 'Depósito',
         ]);
 

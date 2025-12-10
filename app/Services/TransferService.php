@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Enums\TransactionStatus;
+use App\Enums\TransactionType;
 use App\Exceptions\InsufficientBalanceException;
 use App\Exceptions\MerchantCannotSendMoneyException;
 use App\Exceptions\UnauthorizedTransferException;
@@ -55,6 +56,7 @@ class TransferService
             'payee_id' => $payee->id,
             'amount' => $amount,
             'status' => TransactionStatus::Pending,
+            'type' => TransactionType::Transfer,
             'description' => 'Transferência entre usuários',
         ]);
 
