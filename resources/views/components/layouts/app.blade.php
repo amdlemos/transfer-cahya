@@ -44,7 +44,7 @@
         <flux:sidebar.spacer />
 
         <flux:dropdown position="top" align="start" class="max-lg:hidden">
-            <flux:sidebar.profile avatar="https://fluxui.dev/img/demo/user.png" name="{{ auth()->user()->name }}" />
+            <flux:sidebar.profile name="{{ auth()->user()->full_name }}" initials:single />
             <flux:menu>
                 <flux:menu.item icon="arrow-right-start-on-rectangle" x-data @click.prevent="$refs.logoutForm.submit()">
                     Logout
