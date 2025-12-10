@@ -54,13 +54,23 @@ ddev npm run dev
 
 8. Acesse a aplicação no navegador:
 
-```
+```bash
 https://transfer-cahya.ddev.site
 ```
+
+9. Usuário e senha
+
+```php
+User::factory()->create([
+    'name' => 'admin',
+    'email' => 'admin@admin.com',
+    'password' => '123',
+]);
+```
+
+10. Os demais usuários gerados no seed a senha é `password`
 
 ---
 
 Para outras instruções de instalação, configuração e uso, consulte o guia oficial completo:
 👉 [https://ddev.com/get-started/](https://ddev.com/get-started/)
-
-
