@@ -118,6 +118,8 @@ class User extends Authenticatable
 
     /**
      * Relacionamento com Wallet
+     *
+     * @return HasOne<covariant Wallet, covariant User>
      */
     public function wallet(): HasOne
     {
