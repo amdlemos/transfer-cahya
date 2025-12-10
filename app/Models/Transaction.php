@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\TransactionStatus;
+use App\Enums\TransactionType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -21,6 +22,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int $payee_id
  * @property numeric $amount
  * @property TransactionStatus $status
+ * @property TransactionType $type
  * @property string|null $description
  * @property-read \App\Models\TransactionAuthorization|null $authorization
  * @property-read \App\Models\User $payee
@@ -56,12 +58,14 @@ class Transaction extends Model
         'payee_id',
         'amount',
         'status',
+        'type',
         'description',
     ];
 
     protected $casts = [
         'amount' => 'decimal:2',
         'status' => TransactionStatus::class,
+        'type' => TransactionType::class,
     ];
 
     /**
@@ -191,5 +195,13 @@ class Transaction extends Model
     public function scopePending($query)
     {
         return $query->where('status', TransactionStatus::Pending);
+    }
+
+    /**
+     * Scope para filtrar transações por tipo
+     */
+    public function scopeOfType($query, TransactionType $type)
+    {
+        return $query->where('type', $type);
     }
 }

@@ -1,11 +1,12 @@
 <?php
 
 use App\Livewire\DepositoForm;
-use App\Livewire\TransactionTable;
 use App\Livewire\UserTable;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', TransactionTable::class)->name('home')->middleware('auth');
+Route::get('/', function () {
+    return view('home');
+})->name('home')->middleware('auth');
 
 Route::get('/users', UserTable::class)->name('users')->middleware('auth');
 
