@@ -14,35 +14,53 @@ Após instalar o DDEV, siga os passos abaixo para rodar o projeto.
 ```bash
 ddev start
 ```
-
-(O arquivo `.ddev/config.yaml` já está configurado para este projeto.)
-
-2. Acesse a aplicação no navegador:
-
-```
-https://transfer-cahya.ddev.site
-```
-
-3. Comandos úteis (executados diretamente pelo DDEV):
-
-```bash
-ddev artisan migrate
-```
+2. Instale as dependências composer
 
 ```bash
 ddev composer install
 ```
 
+3. Instale as dependências composer
+
+```bash
+ddev artisan key:generate
+```
+
+4. Execute as migrations
+
+```bash
+ddev artisan migrate
+```
+
+5. Execute o seed
+
+```bash
+ddev artisan db:seed
+```
+
+6. Instale as dependências npm
+
 ```bash
 ddev npm install
 ```
 
+7. Faça o build ou rode a aplicação frontend
+
 ```bash
+ddev npm run build 
+or
 ddev npm run dev
+```
+
+8. Acesse a aplicação no navegador:
+
+```
+https://transfer-cahya.ddev.site
 ```
 
 ---
 
 Para outras instruções de instalação, configuração e uso, consulte o guia oficial completo:
 👉 [https://ddev.com/get-started/](https://ddev.com/get-started/)
+
 
