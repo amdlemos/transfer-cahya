@@ -1,7 +1,6 @@
 <?php
 
 use App\Livewire\DepositoForm;
-use App\Livewire\TransactionTable;
 use App\Livewire\UserTable;
 use Illuminate\Support\Facades\Route;
 

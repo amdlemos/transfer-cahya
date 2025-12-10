@@ -61,7 +61,7 @@ class TransactionCharts extends Component
             ->ofType(TransactionType::Transfer)
             ->where('status', TransactionStatus::Completed)
             ->sum('amount');
-        
+
         $receivedAmount = Transaction::where('payee_id', $userId)
             ->ofType(TransactionType::Transfer)
             ->where('status', TransactionStatus::Completed)
