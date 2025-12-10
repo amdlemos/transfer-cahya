@@ -10,13 +10,18 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "laravel/fortify": "^1.32",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
+        "livewire/flux": "^2.9",
         "livewire/livewire": "^3.7",
+        "power-components/livewire-powergrid": "^6.7",
         "wireui/wireui": "^2.5"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^3.6",
         "fakerphp/faker": "^1.23",
+        "larastan/larastan": "^3.0",
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.26",
         "laravel/sail": "^1.41",
@@ -77,7 +82,8 @@
         "pint": "pint",
         "pint:test": "pint --test",
         "phpcs": "phpcs --report=summary --standard=phpcs.xml . -n",
-        "phpmd": "phpmd . github phpmd.xml --exclude 'tests/*,vendor/*,.ddev/*'",
+        "phpmd": "phpmd . github phpmd.xml --exclude 'tests/*,vendor/*,.ddev/*,app/Actions/Fortify/*,_ide_helper.php,storage/*'",
+        "phpstan": "phpstan analyse",
         "fix": [
             "@phpcbf",
             "@pint"

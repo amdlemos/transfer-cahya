@@ -15,6 +15,9 @@
   <rule ref="Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine">
     <severity>0</severity>
   </rule>
+  <rule ref="Squiz.Commenting.FunctionComment.Missing">
+    <severity>9</severity>
+  </rule>
   <rule ref="Squiz.WhiteSpace.ScopeClosingBrace.ContentBefore">
     <severity>0</severity>
   </rule>
@@ -57,5 +60,6 @@
   <exclude-pattern>database/*</exclude-pattern>
   <exclude-pattern>tests/*</exclude-pattern>
   <exclude-pattern>public/*</exclude-pattern>
+  <exclude-pattern>app/Actions/Fortify/*</exclude-pattern>
 
 </ruleset>
