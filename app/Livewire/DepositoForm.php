@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Exceptions\UnauthorizedTransferException;
+use App\Models\Transaction;
 use App\Services\DepositService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -12,15 +13,16 @@ use Livewire\Component;
  */
 class DepositoForm extends Component
 {
-    public $amount = '';
+    use Traits\BalanceManagement;
 
-    public $failedTransaction = null;
+    public ?float $amount = null;
 
-    public $successMessage = '';
+    public ?Transaction $failedTransaction = null;
 
-    public $errorMessage = '';
+    public string $successMessage = '';
 
-    public $currentBalance;
+    public string $errorMessage = '';
+
 
     protected $rules = [
         'amount' => 'required|numeric|min:0.01|max:999999.99',
@@ -33,21 +35,6 @@ class DepositoForm extends Component
         'amount.max' => 'O valor máximo é R$ 999.999,99.',
     ];
 
-    /**
-     * Inicializa o componente e carrega o saldo atual do usuário
-     */
-    public function mount()
-    {
-        $this->updateBalance();
-    }
-
-    /**
-     * Atualiza o saldo da carteira do usuário autenticado
-     */
-    public function updateBalance()
-    {
-        $this->currentBalance = auth()->guard()->user()->wallet->fresh()->balance;
-    }
 
     /**
      * Processa um novo depósito na carteira do usuário
@@ -60,7 +47,9 @@ class DepositoForm extends Component
         try {
             $depositService->deposit(auth()->guard()->user(), (float) $this->amount);
 
-            $this->successMessage = 'Depósito de R$ '.number_format($this->amount, 2, ',', '.').' realizado com sucesso!';
+            $this->successMessage =
+            'Depósito de R$ '.number_format((float) $this->amount, 2, ',', '.').' realizado com sucesso!';
+
             $this->reset('amount');
 
             $this->dispatch('balance-updated');
@@ -91,7 +80,9 @@ class DepositoForm extends Component
         try {
             $transaction = $depositService->retryDeposit($this->failedTransaction);
 
-            $this->successMessage = 'Depósito de R$ '.number_format($transaction->amount, 2, ',', '.').' realizado com sucesso!';
+            $this->successMessage =
+            'Depósito de R$ '.number_format((float) $transaction->amount, 2, ',', '.').' realizado com sucesso!';
+
             $this->reset(['failedTransaction', 'amount']);
 
             $this->dispatch('balance-updated');
