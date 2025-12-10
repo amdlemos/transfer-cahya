@@ -25,4 +25,12 @@ namespace App\Enums;
             self::Withdrawal => 'Saque',
         };
     }
+
+    /**
+     * Label para uso no PowerGrid Filter
+     */
+    public function labelPowergridFilter(): string
+    {
+        return $this->label();
+    }
 }

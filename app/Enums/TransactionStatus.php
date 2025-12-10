@@ -29,4 +29,12 @@ enum TransactionStatus: string
             self::Reversed => 'Falha técnica',
         };
     }
+
+    /**
+     * Label para uso no PowerGrid Filter
+     */
+    public function labelPowergridFilter(): string
+    {
+        return $this->label();
+    }
 }

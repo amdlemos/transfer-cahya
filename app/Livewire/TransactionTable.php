@@ -2,10 +2,13 @@
 
 namespace App\Livewire;
 
+use App\Enums\TransactionStatus;
+use App\Enums\TransactionType;
 use App\Models\Transaction;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use PowerComponents\LivewirePowerGrid\Column;
+use PowerComponents\LivewirePowerGrid\Facades\Filter;
 use PowerComponents\LivewirePowerGrid\Facades\PowerGrid;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
@@ -60,18 +63,6 @@ final class TransactionTable extends PowerGridComponent
         ];
     }
 
-    /* public function fields(): PowerGridFields */
-    /* { */
-    /*     return PowerGrid::fields() */
-    /*         ->add('id') */
-    /*         ->add('payer_id') */
-    /*         ->add('payee_id') */
-    /*         ->add('amount') */
-    /*         ->add('status') */
-    /*         ->add('description') */
-    /*         ->add('created_at'); */
-    /* } */
-
     /**
      * Define os campos a serem exibidos na tabela
      */
@@ -106,7 +97,11 @@ final class TransactionTable extends PowerGridComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Status', 'status')
+            Column::make('Status', 'status', 'status.status')
+                ->sortable()
+                ->searchable(),
+
+            Column::make('Tipo', 'type', 'type.type')
                 ->sortable()
                 ->searchable(),
 
@@ -125,6 +120,16 @@ final class TransactionTable extends PowerGridComponent
     public function filters(): array
     {
         return [
+            // Filtro de Enum para Status
+            Filter::enumSelect('status', 'status')
+                ->datasource(TransactionStatus::cases())
+                ->optionValue('value')
+                ->optionLabel('status.status'),
+
+            Filter::enumSelect('type', 'type')
+                ->datasource(TransactionType::cases())
+                ->optionValue('value')
+                ->optionLabel('type.type'),
         ];
     }
 }
